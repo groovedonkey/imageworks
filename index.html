@@ -5,7 +5,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Groove Donkey Graphics</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap');
+        body {
+            font-family: 'Fredoka', sans-serif;
+        }
+        .bg-groove-green {
+            background-color: #55b252; /* A bright, cheerful green */
+        }
+        .text-groove-red {
+            color: #d12229; /* A vibrant red */
+        }
+        .border-groove-red {
+            border-color: #d12229;
+        }
+        .bg-groove-yellow {
+            background-color: #f7d636; /* A sunny yellow */
+        }
+        .shadow-groove {
+            box-shadow: 8px 8px 0px 0px #000;
+        }
+        .custom-file-input {
+            width: 0.1px;
+            height: 0.1px;
+            opacity: 0;
+            overflow: hidden;
+            position: absolute;
+            z-index: -1;
+        }
+        .custom-file-label {
+            display: inline-block;
+            cursor: pointer;
+            padding: 1rem 2rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            text-align: center;
+            transition: all 0.2s ease-in-out;
+            background-color: #d12229;
+            color: white;
+        }
+        .custom-file-label:hover {
+            background-color: #b01a21;
+        }
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            max-width: 90%;
+            max-height: 90%;
+            overflow: auto;
+            position: relative;
+        }
+        .close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            cursor: pointer;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .page-content {
+            display: none;
+        }
+        .page-content.active {
+            display: block;
+        }
+    </style>
 </head>
 <body class="bg-groove-green text-black">
     <div class="min-h-screen flex flex-col items-center p-4 md:p-8">
@@ -17,8 +94,8 @@
             </div>
             <nav>
                 <ul class="flex space-x-4 md:space-x-8 text-lg font-bold">
-                    <li><a href="index.html" class="text-black hover:text-groove-red transition-colors">Print-Your-Own</a></li>
-                    <li><a href="art_gallery.html" class="text-black hover:text-groove-red transition-colors">Canvas Prints</a></li>
+                    <li><a href="#" class="text-black hover:text-groove-red transition-colors" onclick="showPage('print-your-own')">Print-Your-Own</a></li>
+                    <li><a href="#" class="text-black hover:text-groove-red transition-colors" onclick="showPage('gallery')">Canvas Prints</a></li>
                     <li><a href="#" class="text-black hover:text-groove-red transition-colors">Contact</a></li>
                 </ul>
             </nav>
@@ -26,58 +103,165 @@
 
         <!-- Main Content Section -->
         <main class="w-full max-w-7xl">
-            <!-- Canvas Printer Section -->
-            <section id="canvas-printer" class="p-6 md:p-12 bg-groove-yellow rounded-xl shadow-groove border-4 border-black mb-8">
-                <h2 class="text-2xl md:text-4xl font-bold text-black mb-6 text-center">Create Your Custom Canvas Print</h2>
-                
-                <!-- Upload and Preview Area -->
-                <div class="flex flex-col lg:flex-row gap-8 items-center lg:items-start mb-8">
-                    <div class="w-full lg:w-1/2 flex flex-col items-center">
-                        <label for="imageUpload" class="custom-file-label shadow-groove border-4 border-black mb-4">
-                            Upload Your Image
-                        </label>
-                        <input type="file" id="imageUpload" class="custom-file-input" accept="image/*">
-                        
-                        <div id="previewContainer" class="w-full h-80 bg-gray-200 rounded-xl border-4 border-black flex justify-center items-center overflow-hidden relative">
-                            <canvas id="imageCanvas" class="max-w-full max-h-full"></canvas>
-                            <span id="previewPlaceholder" class="text-gray-500 font-bold">Image Preview</span>
-                        </div>
-                    </div>
+            <!-- Print-Your-Own Section -->
+            <div id="print-your-own" class="page-content active">
+                <section id="canvas-printer" class="p-6 md:p-12 bg-groove-yellow rounded-xl shadow-groove border-4 border-black mb-8">
+                    <h2 class="text-2xl md:text-4xl font-bold text-black mb-6 text-center">Create Your Custom Canvas Print</h2>
                     
-                    <!-- Options and Controls -->
-                    <div class="w-full lg:w-1/2 bg-white rounded-xl shadow-groove border-4 border-black p-6">
-                        <h3 class="text-xl md:text-2xl font-bold mb-4">Print Options</h3>
-                        
-                        <div class="mb-6">
-                            <label for="sizeSelect" class="block text-lg font-bold mb-2">Select Size:</label>
-                            <select id="sizeSelect" class="w-full p-2 border-2 border-black rounded-lg bg-gray-100 text-lg" disabled>
-                                <option value="">Upload an image to see options</option>
-                            </select>
-                        </div>
-                        
-                        <div class="mb-6">
-                            <h4 class="text-lg font-bold mb-2">Image Controls:</h4>
-                            <div class="flex flex-wrap gap-2">
-                                <button id="zoomInBtn" class="bg-black text-white p-2 rounded-lg font-bold hover:bg-gray-800 transition-colors">Zoom In</button>
-                                <button id="zoomOutBtn" class="bg-black text-white p-2 rounded-lg font-bold hover:bg-gray-800 transition-colors">Zoom Out</button>
-                                <button id="cropBtn" class="bg-black text-white p-2 rounded-lg font-bold hover:bg-gray-800 transition-colors">Crop</button>
-                                <button id="resetBtn" class="bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors">Reset</button>
-                                <button id="restartBtn" class="bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors">Restart</button>
+                    <!-- Image input and Preview Area -->
+                    <div class="flex flex-col lg:flex-row gap-8 items-center lg:items-start mb-8">
+                        <div class="w-full lg:w-1/2 flex flex-col items-center">
+                            <label for="imageUpload" class="custom-file-label shadow-groove border-4 border-black mb-4">
+                                Upload Your Image
+                            </label>
+                            <input type="file" id="imageUpload" class="custom-file-input" accept="image/*">
+                            
+                            <div id="previewContainer" class="w-full h-80 bg-gray-200 rounded-xl border-4 border-black flex justify-center items-center overflow-hidden relative">
+                                <canvas id="imageCanvas" class="max-w-full max-h-full"></canvas>
+                                <span id="previewPlaceholder" class="text-gray-500 font-bold">Image Preview</span>
                             </div>
                         </div>
+                        
+                        <!-- Options and Controls -->
+                        <div class="w-full lg:w-1/2 bg-white rounded-xl shadow-groove border-4 border-black p-6">
+                            <h3 class="text-xl md:text-2xl font-bold mb-4">Print Options</h3>
+                            
+                            <div class="mb-6">
+                                <label for="sizeSelect" class="block text-lg font-bold mb-2">Select Size:</label>
+                                <select id="sizeSelect" class="w-full p-2 border-2 border-black rounded-lg bg-gray-100 text-lg" disabled>
+                                    <option value="">Upload an image to see options</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <h4 class="text-lg font-bold mb-2">Image Controls:</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <button id="zoomInBtn" class="bg-black text-white p-2 rounded-lg font-bold hover:bg-gray-800 transition-colors">Zoom In</button>
+                                    <button id="zoomOutBtn" class="bg-black text-white p-2 rounded-lg font-bold hover:bg-gray-800 transition-colors">Zoom Out</button>
+                                    <button id="cropBtn" class="bg-black text-white p-2 rounded-lg font-bold hover:bg-gray-800 transition-colors">Crop</button>
+                                    <button id="resetBtn" class="bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors">Reset</button>
+                                    <button id="restartBtn" class="bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors">Restart</button>
+                                </div>
+                            </div>
 
-                        <div id="priceDisplay" class="text-xl md:text-3xl font-bold text-groove-red text-center">
-                            Price: TBD
-                        </div>
+                            <div id="priceDisplay" class="text-xl md:text-3xl font-bold text-groove-red text-center">
+                                Price: TBD
+                            </div>
 
-                        <div class="mt-8 text-center">
-                            <button id="addToCartBtn" class="bg-groove-red text-white text-xl font-bold p-4 rounded-xl shadow-groove border-4 border-black hover:bg-red-700 transition-colors">
-                                Add to Cart
-                            </button>
+                            <div class="mt-8 text-center">
+                                <button id="addToCartBtn" class="bg-groove-red text-white text-xl font-bold p-4 rounded-xl shadow-groove border-4 border-black hover:bg-red-700 transition-colors">
+                                    Add to Cart
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            </div>
+
+            <!-- Artwork Gallery Section -->
+            <div id="gallery" class="page-content">
+                <section id="gallery-section" class="p-6 md:p-12 bg-white rounded-xl shadow-groove border-4 border-black mb-8">
+                    <h2 class="text-2xl md:text-4xl font-bold text-black mb-6 text-center">Groove Donkey Graphics</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Gallery Items - 15 placeholders in total -->
+                        <!-- Row 1 -->
+                        <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
+                            <img src="https://placehold.co/600x400/55b252/d12229?text=Gallery+Artwork+1" alt="Gallery Artwork 1" class="w-full h-auto rounded-md mb-4 border-2 border-black">
+                            <select id="gallery-item-1-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
+                            <div id="gallery-item-1-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
+                            <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
+                        </div>
+                        <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
+                            <img src="https://placehold.co/600x400/f7d636/000000?text=Gallery+Artwork+2" alt="Gallery Artwork 2" class="w-full h-auto rounded-md mb-4 border-2 border-black">
+                            <select id="gallery-item-2-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
+                            <div id="gallery-item-2-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
+                            <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
+                        </div>
+                        <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
+                            <img src="https://placehold.co/600x400/d12229/ffffff?text=Gallery+Artwork+3" alt="Gallery Artwork 3" class="w-full h-auto rounded-md mb-4 border-2 border-black">
+                            <select id="gallery-item-3-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
+                            <div id="gallery-item-3-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
+                            <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
+                        </div>
+                        <!-- Row 2 -->
+                        <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
+                            <img src="https://placehold.co/600x400/000000/55b252?text=Gallery+Artwork+4" alt="Gallery Artwork 4" class="w-full h-auto rounded-md mb-4 border-2 border-black">
+                            <select id="gallery-item-4-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
+                            <div id="gallery-item-4-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
+                            <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
+                        </div>
+                        <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
+                            <img src="https://placehold.co/600x400/55b252/000000?text=Gallery+Artwork+5" alt="Gallery Artwork 5" class="w-full h-auto rounded-md mb-4 border-2 border-black">
+                            <select id="gallery-item-5-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
+                            <div id="gallery-item-5-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
+                            <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
+                        </div>
+                        <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
+                            <img src="https://placehold.co/600x400/f7d636/d12229?text=Gallery+Artwork+6" alt="Gallery Artwork 6" class="w-full h-auto rounded-md mb-4 border-2 border-black">
+                            <select id="gallery-item-6-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
+                            <div id="gallery-item-6-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
+                            <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
+                        </div>
+                        <!-- Row 3 -->
+                        <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
+                            <img src="https://placehold.co/600x400/d12229/000000?text=Gallery+Artwork+7" alt="Gallery Artwork 7" class="w-full h-auto rounded-md mb-4 border-2 border-black">
+                            <select id="gallery-item-7-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
+                            <div id="gallery-item-7-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
+                            <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
+                        </div>
+                        <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
+                            <img src="https://placehold.co/600x400/000000/d12229?text=Gallery+Artwork+8" alt="Gallery Artwork 8" class="w-full h-auto rounded-md mb-4 border-2 border-black">
+                            <select id="gallery-item-8-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
+                            <div id="gallery-item-8-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
+                            <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
+                        </div>
+                        <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
+                            <img src="https://placehold.co/600x400/55b252/f7d636?text=Gallery+Artwork+9" alt="Gallery Artwork 9" class="w-full h-auto rounded-md mb-4 border-2 border-black">
+                            <select id="gallery-item-9-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
+                            <div id="gallery-item-9-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
+                            <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
+                        </div>
+                        <!-- Row 4 -->
+                        <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
+                            <img src="https://placehold.co/600x400/f7d636/55b252?text=Gallery+Artwork+10" alt="Gallery Artwork 10" class="w-full h-auto rounded-md mb-4 border-2 border-black">
+                            <select id="gallery-item-10-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
+                            <div id="gallery-item-10-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
+                            <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
+                        </div>
+                        <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
+                            <img src="https://placehold.co/600x400/d12229/55b252?text=Gallery+Artwork+11" alt="Gallery Artwork 11" class="w-full h-auto rounded-md mb-4 border-2 border-black">
+                            <select id="gallery-item-11-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
+                            <div id="gallery-item-11-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
+                            <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
+                        </div>
+                        <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
+                            <img src="https://placehold.co/600x400/55b252/d12229?text=Gallery+Artwork+12" alt="Gallery Artwork 12" class="w-full h-auto rounded-md mb-4 border-2 border-black">
+                            <select id="gallery-item-12-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
+                            <div id="gallery-item-12-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
+                            <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
+                        </div>
+                        <!-- Row 5 -->
+                        <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
+                            <img src="https://placehold.co/600x400/f7d636/000000?text=Gallery+Artwork+13" alt="Gallery Artwork 13" class="w-full h-auto rounded-md mb-4 border-2 border-black">
+                            <select id="gallery-item-13-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
+                            <div id="gallery-item-13-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
+                            <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
+                        </div>
+                        <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
+                            <img src="https://placehold.co/600x400/000000/d12229?text=Gallery+Artwork+14" alt="Gallery Artwork 14" class="w-full h-auto rounded-md mb-4 border-2 border-black">
+                            <select id="gallery-item-14-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
+                            <div id="gallery-item-14-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
+                            <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
+                        </div>
+                        <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
+                            <img src="https://placehold.co/600x400/d12229/ffffff?text=Gallery+Artwork+15" alt="Gallery Artwork 15" class="w-full h-auto rounded-md mb-4 border-2 border-black">
+                            <select id="gallery-item-15-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
+                            <div id="gallery-item-15-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
+                            <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
         </main>
 
         <!-- Footer -->
@@ -94,7 +278,383 @@
         </div>
     </div>
 
-    <script src="shared.js"></script>
-    <script src="index_script.js"></script>
+    <script>
+        // Data and functions moved to a single file for reliable performance
+        const prices = {
+            "8x12": 45, "12x8": 45,
+            "12x16": 75, "16x12": 75,
+            "16x20": 95, "20x16": 95,
+            "16x24": 105, "24x16": 105,
+            "24x36": 130, "36x24": 130
+        };
+
+        const sizes = {
+            portrait: [
+                { value: "8x12", text: '8" x 12"', width: 8, height: 12 },
+                { value: "12x16", text: '12" x 16"', width: 12, height: 16 },
+                { value: "16x20", text: '16" x 20"', width: 16, height: 20 },
+                { value: "16x24", text: '16" x 24"', width: 16, height: 24 },
+                { value: "24x36", text: '24" x 36"', width: 24, height: 36 }
+            ],
+            landscape: [
+                { value: "12x8", text: '12" x 8"', width: 12, height: 8 },
+                { value: "16x12", text: '16" x 12"', width: 16, height: 12 },
+                { value: "20x16", text: '20" x 16"', width: 20, height: 16 },
+                { value: "24x16", text: '24" x 16"', width: 24, height: 16 },
+                { value: "36x24", text: '36" x 24"', width: 36, height: 24 }
+            ]
+        };
+
+        function showMessage(message) {
+            const messageModal = document.getElementById('messageModal');
+            const modalMessage = document.getElementById('modalMessage');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+
+            modalMessage.textContent = message;
+            messageModal.style.display = 'flex';
+
+            closeModalBtn.addEventListener('click', () => {
+                messageModal.style.display = 'none';
+            });
+            window.addEventListener('click', (event) => {
+                if (event.target === messageModal) {
+                    messageModal.style.display = 'none';
+                }
+            });
+        }
+        
+        function showPage(pageId) {
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const imageUpload = document.getElementById('imageUpload');
+            const previewContainer = document.getElementById('previewContainer');
+            const previewPlaceholder = document.getElementById('previewPlaceholder');
+            const imageCanvas = document.getElementById('imageCanvas');
+            const sizeSelect = document.getElementById('sizeSelect');
+            const zoomInBtn = document.getElementById('zoomInBtn');
+            const zoomOutBtn = document.getElementById('zoomOutBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            const cropBtn = document.getElementById('cropBtn');
+            const restartBtn = document.getElementById('restartBtn');
+            const priceDisplay = document.getElementById('priceDisplay');
+        
+            const ctx = imageCanvas.getContext('2d');
+            let uploadedImage = new Image();
+            let originalImageSrc = null;
+            let scale = 1;
+            let offsetX = 0;
+            let offsetY = 0;
+            let isDragging = false;
+            let lastMouseX = 0;
+            let lastMouseY = 0;
+            let isImageLoaded = false;
+            let cropMode = false;
+        
+            // Handle image upload
+            imageUpload.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        originalImageSrc = event.target.result;
+                        uploadedImage.onload = () => {
+                            isImageLoaded = true;
+                            resetImage();
+                            previewPlaceholder.style.display = 'none';
+                            populateSizeOptions(uploadedImage.width, uploadedImage.height);
+                        };
+                        uploadedImage.src = originalImageSrc;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        
+            // Populate the size dropdown based on image orientation
+            function populateSizeOptions(imageWidth, imageHeight) {
+                sizeSelect.innerHTML = '';
+                sizeSelect.disabled = false;
+        
+                const aspectRatio = imageWidth / imageHeight;
+                let orientation;
+        
+                if (aspectRatio >= 1) {
+                    orientation = 'landscape';
+                } else {
+                    orientation = 'portrait';
+                }
+        
+                sizes[orientation].forEach(size => {
+                    const option = document.createElement('option');
+                    option.value = size.value;
+                    option.textContent = size.text;
+                    sizeSelect.appendChild(option);
+                });
+        
+                setCanvasDimensions();
+                updatePriceDisplay();
+            }
+        
+            // Update canvas dimensions and redraw the image
+            function setCanvasDimensions() {
+                if (!isImageLoaded) return;
+        
+                const selectedSizeValue = sizeSelect.value;
+                const allSizes = [...sizes.portrait, ...sizes.landscape];
+                const selectedSize = allSizes.find(size => size.value === selectedSizeValue);
+                if (!selectedSize) return;
+                
+                const containerWidth = previewContainer.offsetWidth;
+                let newWidth, newHeight;
+                if (selectedSize.width > selectedSize.height) {
+                    newWidth = containerWidth;
+                    newHeight = (containerWidth / selectedSize.width) * selectedSize.height;
+                } else {
+                    newHeight = containerWidth;
+                    newWidth = (containerWidth / selectedSize.height) * selectedSize.width;
+                }
+        
+                imageCanvas.width = newWidth;
+                imageCanvas.height = newHeight;
+                previewContainer.style.height = `${newHeight}px`;
+                drawImage();
+            }
+        
+            function updatePriceDisplay() {
+                const selectedSizeValue = sizeSelect.value;
+                const price = prices[selectedSizeValue];
+                if (price) {
+                    priceDisplay.textContent = `Price: $${price}`;
+                } else {
+                    priceDisplay.textContent = `Price: TBD`;
+                }
+            }
+            
+            sizeSelect.addEventListener('change', () => {
+                setCanvasDimensions();
+                updatePriceDisplay();
+            });
+            window.addEventListener('resize', setCanvasDimensions);
+        
+            function drawImage() {
+                if (!isImageLoaded) return;
+                
+                const canvasWidth = imageCanvas.width;
+                const canvasHeight = imageCanvas.height;
+                
+                ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+                
+                const currentWidth = uploadedImage.width * scale;
+                const currentHeight = uploadedImage.height * scale;
+        
+                const aspectRatio = uploadedImage.width / uploadedImage.height;
+                const canvasAspectRatio = canvasWidth / canvasHeight;
+        
+                let drawWidth, drawHeight;
+                if (aspectRatio > canvasAspectRatio) {
+                    drawHeight = canvasHeight * scale;
+                    drawWidth = drawHeight * aspectRatio;
+                } else {
+                    drawWidth = canvasWidth * scale;
+                    drawHeight = drawWidth / aspectRatio;
+                }
+                
+                const centerX = (canvasWidth - drawWidth) / 2;
+                const centerY = (canvasHeight - drawHeight) / 2;
+        
+                ctx.drawImage(uploadedImage, centerX + offsetX, centerY + offsetY, drawWidth, drawHeight);
+                
+                if (cropMode) {
+                    ctx.strokeStyle = '#d12229';
+                    ctx.lineWidth = 2;
+                    ctx.setLineDash([5, 5]);
+                    ctx.strokeRect(0, 0, canvasWidth, canvasHeight);
+                    ctx.setLineDash([]);
+                }
+            }
+        
+            function resetImage() {
+                scale = 1;
+                offsetX = 0;
+                offsetY = 0;
+                drawImage();
+            }
+        
+            // Image controls
+            zoomInBtn.addEventListener('click', () => {
+                if (!isImageLoaded) { showMessage("Please upload an image first."); return; }
+                scale *= 1.1;
+                drawImage();
+            });
+        
+            zoomOutBtn.addEventListener('click', () => {
+                if (!isImageLoaded) { showMessage("Please upload an image first."); return; }
+                scale /= 1.1;
+                if (scale < 0.1) scale = 0.1;
+                drawImage();
+            });
+        
+            resetBtn.addEventListener('click', () => {
+                if (!isImageLoaded) { showMessage("Please upload an image first."); return; }
+                uploadedImage.src = originalImageSrc;
+                uploadedImage.onload = () => {
+                    resetImage();
+                };
+                cropBtn.textContent = 'Crop';
+                cropMode = false;
+            });
+        
+            cropBtn.addEventListener('click', () => {
+                if (!isImageLoaded) { showMessage("Please upload an image first."); return; }
+                cropMode = !cropMode;
+                cropBtn.textContent = cropMode ? 'Apply Crop' : 'Crop';
+                
+                if (!cropMode) {
+                    const tempCanvas = document.createElement('canvas');
+                    tempCanvas.width = imageCanvas.width;
+                    tempCanvas.height = imageCanvas.height;
+                    const tempCtx = tempCanvas.getContext('2d');
+                    
+                    tempCtx.drawImage(imageCanvas, 0, 0, tempCanvas.width, tempCanvas.height);
+                    
+                    uploadedImage.src = tempCanvas.toDataURL('image/png');
+                    uploadedImage.onload = () => {
+                        resetImage();
+                    };
+                }
+                drawImage();
+            });
+            
+            // Restart button functionality
+            restartBtn.addEventListener('click', () => {
+                if (!isImageLoaded) { showMessage("No image to restart with."); return; }
+                isImageLoaded = false;
+                ctx.clearRect(0, 0, imageCanvas.width, imageCanvas.height);
+                previewPlaceholder.style.display = 'block';
+                imageUpload.value = '';
+                sizeSelect.innerHTML = '<option value="">Upload an image to see options</option>';
+                sizeSelect.disabled = true;
+                priceDisplay.textContent = 'Price: TBD';
+                cropBtn.textContent = 'Crop';
+                cropMode = false;
+                scale = 1;
+                offsetX = 0;
+                offsetY = 0;
+            });
+        
+            // Dragging for alignment
+            imageCanvas.addEventListener('mousedown', (e) => {
+                if (!isImageLoaded) return;
+                isDragging = true;
+                lastMouseX = e.clientX;
+                lastMouseY = e.clientY;
+            });
+        
+            imageCanvas.addEventListener('mousemove', (e) => {
+                if (!isDragging || !isImageLoaded) return;
+                const dx = e.clientX - lastMouseX;
+                const dy = e.clientY - lastMouseY;
+                offsetX += dx;
+                offsetY += dy;
+                lastMouseX = e.clientX;
+                lastMouseY = e.clientY;
+                drawImage();
+            });
+        
+            imageCanvas.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+        
+            imageCanvas.addEventListener('mouseleave', () => {
+                isDragging = false;
+            });
+        
+            // Touch events for mobile
+            imageCanvas.addEventListener('touchstart', (e) => {
+                if (!isImageLoaded) return;
+                isDragging = true;
+                const touch = e.touches[0];
+                lastMouseX = touch.clientX;
+                lastMouseY = touch.clientY;
+                e.preventDefault();
+            });
+        
+            imageCanvas.addEventListener('touchmove', (e) => {
+                if (!isDragging || !isImageLoaded) return;
+                const touch = e.touches[0];
+                const dx = touch.clientX - lastMouseX;
+                const dy = touch.clientY - lastMouseY;
+                offsetX += dx;
+                offsetY += dy;
+                lastMouseX = touch.clientX;
+                lastMouseY = touch.clientY;
+                drawImage();
+                e.preventDefault();
+            });
+        
+            imageCanvas.addEventListener('touchend', () => {
+                isDragging = false;
+            });
+        
+            // Add to cart functionality for custom prints
+            document.getElementById('addToCartBtn').addEventListener('click', () => {
+                if (!isImageLoaded) {
+                    showMessage("Please upload an image before adding to cart!");
+                    return;
+                }
+                const selectedSizeValue = sizeSelect.value;
+                const price = prices[selectedSizeValue];
+                const selectedSizeText = sizeSelect.options[sizeSelect.selectedIndex].text;
+                
+                const message = `Added your ${selectedSizeText} canvas print to the cart for $${price}!`;
+                showMessage(message);
+            });
+        
+            // Gallery section functionality
+            const artworkSizes = sizes.landscape;
+            const gallerySelects = document.querySelectorAll('.gallery-size-select');
+            const galleryBuyButtons = document.querySelectorAll('.gallery-buy-btn');
+        
+            gallerySelects.forEach((select, index) => {
+                artworkSizes.forEach(size => {
+                    const option = document.createElement('option');
+                    option.value = size.value;
+                    option.textContent = size.text;
+                    select.appendChild(option);
+                });
+        
+                select.addEventListener('change', () => {
+                    const selectedSizeValue = select.value;
+                    const priceDisplay = document.getElementById(`gallery-item-${index + 1}-price`);
+                    const price = prices[selectedSizeValue];
+                    priceDisplay.textContent = `Price: $${price}`;
+                });
+        
+                const initialPrice = prices[select.value];
+                const priceDisplay = document.getElementById(`gallery-item-${index + 1}-price`);
+                if (initialPrice) {
+                    priceDisplay.textContent = `Price: $${initialPrice}`;
+                } else {
+                    priceDisplay.textContent = `Price: TBD`;
+                }
+        
+                galleryBuyButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const selectElement = button.parentElement.querySelector('.gallery-size-select');
+                        const selectedSizeValue = selectElement.value;
+                        const price = prices[selectedSizeValue];
+                        const selectedSizeText = selectElement.options[selectElement.selectedIndex].text;
+                        const artworkNumber = button.parentElement.querySelector('img').alt.slice(-1);
+                        const message = `Added Artwork ${artworkNumber} (${selectedSizeText}) to the cart for $${price}!`;
+                        showMessage(message);
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 </html>
