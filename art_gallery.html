@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groove Donkey Graphics - Gallery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-groove-green text-black">
+    <div class="min-h-screen flex flex-col items-center p-4 md:p-8">
+        <!-- Header -->
+        <header class="w-full max-w-7xl flex flex-col md:flex-row items-center justify-between p-4 bg-white rounded-xl shadow-groove border-4 border-black mb-8">
+            <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                <img src="https://storage.googleapis.com/gweb-uniblog-publish-prod/images/The_Groove_Donkey_Logo.width-1200.png" alt="Groove Donkey Logo" class="h-16 md:h-24">
+                <h1 class="text-3xl md:text-5xl font-bold text-groove-red tracking-wide">Groove Donkey Graphics</h1>
+            </div>
+            <nav>
+                <ul class="flex space-x-4 md:space-x-8 text-lg font-bold">
+                    <li><a href="index.html" class="text-black hover:text-groove-red transition-colors">Print-Your-Own</a></li>
+                    <li><a href="art_gallery.html" class="text-black hover:text-groove-red transition-colors">Canvas Prints</a></li>
+                    <li><a href="#" class="text-black hover:text-groove-red transition-colors">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Main Content Section -->
+        <main class="w-full max-w-7xl">
+            <!-- Artwork Gallery Section -->
+            <section id="gallery-section" class="p-6 md:p-12 bg-white rounded-xl shadow-groove border-4 border-black mb-8">
+                <h2 class="text-2xl md:text-4xl font-bold text-black mb-6 text-center">Groove Donkey Graphics</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Gallery Items - 15 placeholders in total -->
+                    <!-- Row 1 -->
+                    <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
+                        <img src="https://placehold.co/600x400/55b252/d12229?text=Gallery+Artwork+1" alt="Gallery Artwork 1" class="w-full h-auto rounded-md mb-4 border-2 border-black">
+                        <select id="gallery-item-1-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
+                        <div id="gallery-item-1-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
+                        <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
+                    </div>
+                    <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
+                        <img src="https://placehold.co/600x400/f7d636/000000?text=Gallery+Artwork+2" alt="Gallery Artwork 2" class="w-full h-auto rounded-md mb-4 border-2 border-black">
+                        <select id="gallery-item-2-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
+                        <div id="gallery-item-2-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
+                        <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
+                    </div>
+                    <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
+                        <img src="https://placehold.co/600x400/d12229/ffffff?text=Gallery+Artwork+3" alt="Gallery Artwork 3" class="w-full h-auto rounded-md mb-4 border-2 border-black">
+                        <select id="gallery-item-3-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
+                        <div id="gallery-item-3-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
+                        <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
+                    </div>
+                    <!-- Row 2 -->
+                    <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
+                        <img src="https://placehold.co/600x400/000000/55b252?text=Gallery+Artwork+4" alt="Gallery Artwork 4" class="w-full h-auto rounded-md mb-4 border-2 border-black">
+                        <select id="gallery-item-4-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
+                        <div id="gallery-item-4-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
+                        <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
+                    </div>
+                    <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
+                        <img src="https://placehold.co/600x400/55b252/000000?text=Gallery+Artwork+5" alt="Gallery Artwork 5" class="w-full h-auto rounded-md mb-4 border-2 border-black">
+                        <select id="gallery-item-5-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
+                        <div id="gallery-item-5-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
+                        <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
+                    </div>
+                    <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
+                        <img src="https://placehold.co/600x400/f7d636/d12229?text=Gallery+Artwork+6" alt="Gallery Artwork 6" class="w-full h-auto rounded-md mb-4 border-2 border-black">
+                        <select id="gallery-item-6-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
+                        <div id="gallery-item-6-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
+                        <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
+                    </div>
+                    <!-- Row 3 -->
+                    <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
+                        <img src="https://placehold.co/600x400/d12229/000000?text=Gallery+Artwork+7" alt="Gallery Artwork 7" class="w-full h-auto rounded-md mb-4 border-2 border-black">
+                        <select id="gallery-item-7-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
+                        <div id="gallery-item-7-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
+                        <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
+                    </div>
+                    <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
+                        <img src="https://placehold.co/600x400/000000/d12229?text=Gallery+Artwork+8" alt="Gallery Artwork 8" class="w-full h-auto rounded-md mb-4 border-2 border-black">
+                        <select id="gallery-item-8-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
+                        <div id="gallery-item-8-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
+                        <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
+                    </div>
+                    <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
+                        <img src="https://placehold.co/600x400/55b252/f7d636?text=Gallery+Artwork+9" alt="Gallery Artwork 9" class="w-full h-auto rounded-md mb-4 border-2 border-black">
+                        <select id="gallery-item-9-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
+                        <div id="gallery-item-9-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
+                        <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
+                    </div>
+                    <!-- Row 4 -->
+                    <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
+                        <img src="https://placehold.co/600x400/f7d636/55b252?text=Gallery+Artwork+10" alt="Gallery Artwork 10" class="w-full h-auto rounded-md mb-4 border-2 border-black">
+                        <select id="gallery-item-10-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
+                        <div id="gallery-item-10-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
+                        <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
+                    </div>
+                    <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
+                        <img src="https://placehold.co/600x400/d12229/55b252?text=Gallery+Artwork+11" alt="Gallery Artwork 11" class="w-full h-auto rounded-md mb-4 border-2 border-black">
+                        <select id="gallery-item-11-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
+                        <div id="gallery-item-11-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
+                        <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
+                    </div>
+                    <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
+                        <img src="https://placehold.co/600x400/55b252/d12229?text=Gallery+Artwork+12" alt="Gallery Artwork 12" class="w-full h-auto rounded-md mb-4 border-2 border-black">
+                        <select id="gallery-item-12-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
+                        <div id="gallery-item-12-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
+                        <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
+                    </div>
+                    <!-- Row 5 -->
+                    <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
+                        <img src="https://placehold.co/600x400/f7d636/000000?text=Gallery+Artwork+13" alt="Gallery Artwork 13" class="w-full h-auto rounded-md mb-4 border-2 border-black">
+                        <select id="gallery-item-13-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
+                        <div id="gallery-item-13-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
+                        <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
+                    </div>
+                    <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
+                        <img src="https://placehold.co/600x400/000000/d12229?text=Gallery+Artwork+14" alt="Gallery Artwork 14" class="w-full h-auto rounded-md mb-4 border-2 border-black">
+                        <select id="gallery-item-14-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
+                        <div id="gallery-item-14-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
+                        <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
+                    </div>
+                    <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
+                        <img src="https://placehold.co/600x400/d12229/ffffff?text=Gallery+Artwork+15" alt="Gallery Artwork 15" class="w-full h-auto rounded-md mb-4 border-2 border-black">
+                        <select id="gallery-item-15-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
+                        <div id="gallery-item-15-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
+                        <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="w-full max-w-7xl p-4 text-center text-sm text-gray-800">
+            &copy; 2025 Groove Donkey Graphics. All Rights Reserved.
+        </footer>
+
+        <!-- Modal for messages -->
+        <div id="messageModal" class="modal">
+            <div class="modal-content text-center shadow-groove border-4 border-black">
+                <span id="closeModalBtn" class="close-button">&times;</span>
+                <p id="modalMessage" class="text-xl font-bold"></p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="shared.js"></script>
+    <script src="gallery_script.js"></script>
+</body>
+</html>

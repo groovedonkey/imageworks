@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groove Donkey Graphics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-groove-green text-black">
+    <div class="min-h-screen flex flex-col items-center p-4 md:p-8">
+        <!-- Header -->
+        <header class="w-full max-w-7xl flex flex-col md:flex-row items-center justify-between p-4 bg-white rounded-xl shadow-groove border-4 border-black mb-8">
+            <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                <img src="https://storage.googleapis.com/gweb-uniblog-publish-prod/images/The_Groove_Donkey_Logo.width-1200.png" alt="Groove Donkey Logo" class="h-16 md:h-24">
+                <h1 class="text-3xl md:text-5xl font-bold text-groove-red tracking-wide">Groove Donkey Graphics</h1>
+            </div>
+            <nav>
+                <ul class="flex space-x-4 md:space-x-8 text-lg font-bold">
+                    <li><a href="index.html" class="text-black hover:text-groove-red transition-colors">Print-Your-Own</a></li>
+                    <li><a href="art_gallery.html" class="text-black hover:text-groove-red transition-colors">Canvas Prints</a></li>
+                    <li><a href="#" class="text-black hover:text-groove-red transition-colors">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Main Content Section -->
+        <main class="w-full max-w-7xl">
+            <!-- Canvas Printer Section -->
+            <section id="canvas-printer" class="p-6 md:p-12 bg-groove-yellow rounded-xl shadow-groove border-4 border-black mb-8">
+                <h2 class="text-2xl md:text-4xl font-bold text-black mb-6 text-center">Create Your Custom Canvas Print</h2>
+                
+                <!-- Upload and Preview Area -->
+                <div class="flex flex-col lg:flex-row gap-8 items-center lg:items-start mb-8">
+                    <div class="w-full lg:w-1/2 flex flex-col items-center">
+                        <label for="imageUpload" class="custom-file-label shadow-groove border-4 border-black mb-4">
+                            Upload Your Image
+                        </label>
+                        <input type="file" id="imageUpload" class="custom-file-input" accept="image/*">
+                        
+                        <div id="previewContainer" class="w-full h-80 bg-gray-200 rounded-xl border-4 border-black flex justify-center items-center overflow-hidden relative">
+                            <canvas id="imageCanvas" class="max-w-full max-h-full"></canvas>
+                            <span id="previewPlaceholder" class="text-gray-500 font-bold">Image Preview</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Options and Controls -->
+                    <div class="w-full lg:w-1/2 bg-white rounded-xl shadow-groove border-4 border-black p-6">
+                        <h3 class="text-xl md:text-2xl font-bold mb-4">Print Options</h3>
+                        
+                        <div class="mb-6">
+                            <label for="sizeSelect" class="block text-lg font-bold mb-2">Select Size:</label>
+                            <select id="sizeSelect" class="w-full p-2 border-2 border-black rounded-lg bg-gray-100 text-lg" disabled>
+                                <option value="">Upload an image to see options</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h4 class="text-lg font-bold mb-2">Image Controls:</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <button id="zoomInBtn" class="bg-black text-white p-2 rounded-lg font-bold hover:bg-gray-800 transition-colors">Zoom In</button>
+                                <button id="zoomOutBtn" class="bg-black text-white p-2 rounded-lg font-bold hover:bg-gray-800 transition-colors">Zoom Out</button>
+                                <button id="cropBtn" class="bg-black text-white p-2 rounded-lg font-bold hover:bg-gray-800 transition-colors">Crop</button>
+                                <button id="resetBtn" class="bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors">Reset</button>
+                                <button id="restartBtn" class="bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors">Restart</button>
+                            </div>
+                        </div>
+
+                        <div id="priceDisplay" class="text-xl md:text-3xl font-bold text-groove-red text-center">
+                            Price: TBD
+                        </div>
+
+                        <div class="mt-8 text-center">
+                            <button id="addToCartBtn" class="bg-groove-red text-white text-xl font-bold p-4 rounded-xl shadow-groove border-4 border-black hover:bg-red-700 transition-colors">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="w-full max-w-7xl p-4 text-center text-sm text-gray-800">
+            &copy; 2025 Groove Donkey Graphics. All Rights Reserved.
+        </footer>
+
+        <!-- Modal for messages -->
+        <div id="messageModal" class="modal">
+            <div class="modal-content text-center shadow-groove border-4 border-black">
+                <span id="closeModalBtn" class="close-button">&times;</span>
+                <p id="modalMessage" class="text-xl font-bold"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="shared.js"></script>
+    <script src="index_script.js"></script>
+</body>
+</html>
