@@ -3,28 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Groove Donkey Graphics</title>
+    <title>Groove Donkey Imageworks</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Bangers&display=swap" rel="stylesheet">
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap');
+        /* Custom CSS for the Groove Donkey Vibe */
         body {
-            font-family: 'Fredoka', sans-serif;
+            font-family: 'Poppins', sans-serif;
+            background-color: #55b252; /* groove-green */
         }
-        .bg-groove-green {
-            background-color: #55b252; /* A bright, cheerful green */
+        
+        .title-font {
+            font-family: 'Bangers', cursive;
         }
-        .text-groove-red {
-            color: #d12229; /* A vibrant red */
+
+        /* Custom Tailwind Configuration */
+        .tailwind-config {
+            display: none;
         }
-        .border-groove-red {
-            border-color: #d12229;
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'groove-green': '#55b252',
+                        'groove-yellow': '#f7d636',
+                        'groove-red': '#d12229',
+                    },
+                    boxShadow: {
+                        'groove': '4px 4px 0px 0px rgba(0,0,0,1)',
+                    },
+                    translate: {
+                        'groove': '4px',
+                    }
+                }
+            }
         }
-        .bg-groove-yellow {
-            background-color: #f7d636; /* A sunny yellow */
+
+        /* Custom Component Styles */
+        .nav-link {
+            @apply title-font px-4 py-2 rounded-lg text-lg bg-groove-red text-groove-yellow border-2 border-black shadow-md transition-all duration-300;
+            text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+            letter-spacing: 1px;
         }
-        .shadow-groove {
-            box-shadow: 8px 8px 0px 0px #000;
+        .nav-link.active, .nav-link:hover {
+            @apply text-white;
+            text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
         }
+
+        .groove-btn {
+            @apply px-6 py-3 bg-groove-red text-white font-bold rounded-xl shadow-groove border-2 border-black transition-all duration-200 ease-in-out;
+        }
+        .groove-btn:hover {
+            @apply -translate-y-1 shadow-lg;
+        }
+        .groove-btn:active {
+            @apply translate-y-0 shadow-md;
+        }
+        
+        .control-btn {
+             @apply px-4 py-2 bg-black text-white font-bold rounded-lg hover:bg-gray-800 transition-colors;
+        }
+
+        .groove-card {
+            @apply bg-white rounded-xl shadow-groove border-4 border-black;
+        }
+        
+        .custom-file-label {
+            @apply block w-full max-w-xs text-center cursor-pointer bg-groove-yellow p-4 rounded-xl shadow-groove border-4 border-black font-bold text-xl;
+            @apply transition-all duration-200 ease-in-out;
+        }
+        .custom-file-label:hover {
+             @apply -translate-y-1 shadow-lg;
+        }
+
         .custom-file-input {
             width: 0.1px;
             height: 0.1px;
@@ -33,240 +89,157 @@
             position: absolute;
             z-index: -1;
         }
-        .custom-file-label {
-            display: inline-block;
-            cursor: pointer;
-            padding: 1rem 2rem;
-            border-radius: 9999px;
-            font-weight: 700;
-            text-align: center;
-            transition: all 0.2s ease-in-out;
-            background-color: #d12229;
-            color: white;
-        }
-        .custom-file-label:hover {
-            background-color: #b01a21;
-        }
+        
+        /* Modal Styles */
         .modal {
-            position: fixed;
-            top: 0;
+            display: none; 
+            position: fixed; 
+            z-index: 1000;
             left: 0;
+            top: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        .modal-content {
-            background: white;
-            padding: 2rem;
-            border-radius: 1rem;
-            max-width: 90%;
-            max-height: 90%;
             overflow: auto;
-            position: relative;
+            background-color: rgba(0,0,0,0.6);
+            align-items: center;
+            justify-content: center;
         }
+
+        .modal-content {
+            @apply bg-groove-yellow p-8 rounded-xl relative w-11/12 max-w-md;
+        }
+
         .close-button {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            cursor: pointer;
-            font-size: 1.5rem;
-            font-weight: bold;
+            @apply absolute top-2 right-4 text-black text-4xl font-bold cursor-pointer;
         }
-        .page-content {
-            display: none;
+        .close-button:hover {
+            @apply text-groove-red;
         }
-        .page-content.active {
-            display: block;
-        }
-    </style>
+    
+/* Header background */
+header {
+    background-color: #f7d636; /* yellow */
+}
+
+/* Navigation links: red buttons, yellow text, black outline */
+.nav-link {
+    @apply title-font px-4 py-2 rounded-lg text-lg;
+    background-color: #d12229; /* red */
+    color: #f7d636; /* yellow text */
+    border: 2px solid black; /* black outline */
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    background-color: #b51d22; /* darker red on hover */
+    color: #ffffff; /* white text on hover */
+}
+
+
+
+
+
+
+
+
+/* Red text with red shadow effect for header title */
+header h1 {
+    color: #d12229; /* red text */
+    text-shadow:
+        3px 3px 0 #d12229,
+        -1px -1px 0 #d12229,
+        1px -1px 0 #d12229,
+        -1px 1px 0 #d12229,
+        1px 1px 0 #d12229;
+}
+
+</style>
 </head>
-<body class="bg-groove-green text-black">
+<body class="text-black">
     <div class="min-h-screen flex flex-col items-center p-4 md:p-8">
         <!-- Header -->
-        <header class="w-full max-w-7xl flex flex-col md:flex-row items-center justify-between p-4 bg-white rounded-xl shadow-groove border-4 border-black mb-8">
+        <header class="w-full max-w-7xl flex flex-col md:flex-row items-center justify-between p-4 bg-groove-yellow rounded-xl shadow-groove border-4 border-black mb-8">
             <div class="flex items-center space-x-4 mb-4 md:mb-0">
-                <img src="https://storage.googleapis.com/gweb-uniblog-publish-prod/images/The_Groove_Donkey_Logo.width-1200.png" alt="Groove Donkey Logo" class="h-16 md:h-24">
-                <h1 class="text-3xl md:text-5xl font-bold text-groove-red tracking-wide">Groove Donkey Graphics</h1>
+                <img src="https://raw.githubusercontent.com/groovedonkey/imageworks/main/The%20Groove%20Donkey%20Logo.png" alt="Groove Donkey Logo" class="h-20 md:h-24" onerror="this.onerror=null;this.src='https://placehold.co/150x150/55b252/ffffff?text=Logo';">
+                <h1 class="title-font text-4xl md:text-6xl text-groove-red tracking-wider" style="text-shadow: 3px 3px 0px #000;">Groove Donkey Imageworks</h1>
             </div>
             <nav>
-                <ul class="flex space-x-4 md:space-x-8 text-lg font-bold">
-                    <li><a href="#" class="text-black hover:text-groove-red transition-colors" onclick="showPage('print-your-own')">Print-Your-Own</a></li>
-                    <li><a href="#" class="text-black hover:text-groove-red transition-colors" onclick="showPage('gallery')">Canvas Prints</a></li>
-                    <li><a href="#" class="text-black hover:text-groove-red transition-colors">Contact</a></li>
+                <ul class="flex space-x-2 md:space-x-4">
+                    <li><a href="#upload" id="nav-upload" class="nav-link active">Print-Your-Own</a></li>
+                    <li><a href="#gallery" id="nav-gallery" class="nav-link">Canvas Prints</a></li>
+                    <li><a href="#" id="nav-contact" class="nav-link">Contact</a></li>
                 </ul>
             </nav>
         </header>
 
-        <!-- Main Content Section -->
+        <!-- Main Content: Sections will be toggled via JS -->
         <main class="w-full max-w-7xl">
-            <!-- Print-Your-Own Section -->
-            <div id="print-your-own" class="page-content active">
-                <section id="canvas-printer" class="p-6 md:p-12 bg-groove-yellow rounded-xl shadow-groove border-4 border-black mb-8">
-                    <h2 class="text-2xl md:text-4xl font-bold text-black mb-6 text-center">Create Your Custom Canvas Print</h2>
+            <!-- Canvas Printer Section -->
+            <section id="upload-section" class="p-6 md:p-12 bg-groove-yellow rounded-xl shadow-groove border-4 border-black mb-8">
+                <h2 class="text-2xl md:text-4xl font-bold text-black mb-4 text-center">Create Your Custom Canvas Print</h2>
+                <p class="text-center font-semibold text-lg text-black max-w-3xl mx-auto mb-8">Your image, printed on canvas, mounted onto a 1.5" wooden frame, and shipped directly to you at no extra cost!</p>
+                
+                <div class="flex flex-col lg:flex-row gap-8 items-center lg:items-start">
+                    <!-- Upload and Preview -->
+                    <div class="w-full lg:w-1/2 flex flex-col items-center">
+                        <input type="file" id="imageUpload" class="custom-file-input" accept="image/*">
+                        <label for="imageUpload" class="custom-file-label mb-4">
+                            Upload Your Image
+                        </label>
+                        
+                        <div id="previewContainer" class="w-full aspect-video bg-gray-200 rounded-xl border-4 border-black flex justify-center items-center overflow-hidden relative">
+                            <canvas id="imageCanvas" class="max-w-full max-h-full transition-transform duration-300"></canvas>
+                            <span id="previewPlaceholder" class="text-gray-500 font-bold text-xl">Image Preview</span>
+                        </div>
+                    </div>
                     
-                    <!-- Image input and Preview Area -->
-                    <div class="flex flex-col lg:flex-row gap-8 items-center lg:items-start mb-8">
-                        <div class="w-full lg:w-1/2 flex flex-col items-center">
-                            <label for="imageUpload" class="custom-file-label shadow-groove border-4 border-black mb-4">
-                                Upload Your Image
-                            </label>
-                            <input type="file" id="imageUpload" class="custom-file-input" accept="image/*">
-                            
-                            <div id="previewContainer" class="w-full h-80 bg-gray-200 rounded-xl border-4 border-black flex justify-center items-center overflow-hidden relative">
-                                <canvas id="imageCanvas" class="max-w-full max-h-full"></canvas>
-                                <span id="previewPlaceholder" class="text-gray-500 font-bold">Image Preview</span>
-                            </div>
+                    <!-- Options and Controls -->
+                    <div class="w-full lg:w-1/2 groove-card p-6">
+                        <h3 class="text-xl md:text-2xl font-bold mb-4">1. Select Size</h3>
+                        <div class="mb-6">
+                            <select id="sizeSelect" class="w-full p-3 border-2 border-black rounded-lg bg-gray-100 text-lg" disabled>
+                                <option value="">Upload an image first</option>
+                            </select>
                         </div>
                         
-                        <!-- Options and Controls -->
-                        <div class="w-full lg:w-1/2 bg-white rounded-xl shadow-groove border-4 border-black p-6">
-                            <h3 class="text-xl md:text-2xl font-bold mb-4">Print Options</h3>
-                            
-                            <div class="mb-6">
-                                <label for="sizeSelect" class="block text-lg font-bold mb-2">Select Size:</label>
-                                <select id="sizeSelect" class="w-full p-2 border-2 border-black rounded-lg bg-gray-100 text-lg" disabled>
-                                    <option value="">Upload an image to see options</option>
-                                </select>
-                            </div>
-                            
-                            <div class="mb-6">
-                                <h4 class="text-lg font-bold mb-2">Image Controls:</h4>
-                                <div class="flex flex-wrap gap-2">
-                                    <button id="zoomInBtn" class="bg-black text-white p-2 rounded-lg font-bold hover:bg-gray-800 transition-colors">Zoom In</button>
-                                    <button id="zoomOutBtn" class="bg-black text-white p-2 rounded-lg font-bold hover:bg-gray-800 transition-colors">Zoom Out</button>
-                                    <button id="cropBtn" class="bg-black text-white p-2 rounded-lg font-bold hover:bg-gray-800 transition-colors">Crop</button>
-                                    <button id="resetBtn" class="bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors">Reset</button>
-                                    <button id="restartBtn" class="bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors">Restart</button>
-                                </div>
-                            </div>
-
-                            <div id="priceDisplay" class="text-xl md:text-3xl font-bold text-groove-red text-center">
-                                Price: TBD
-                            </div>
-
-                            <div class="mt-8 text-center">
-                                <button id="addToCartBtn" class="bg-groove-red text-white text-xl font-bold p-4 rounded-xl shadow-groove border-4 border-black hover:bg-red-700 transition-colors">
-                                    Add to Cart
-                                </button>
+                        <h3 class="text-xl md:text-2xl font-bold mb-4">2. Adjust Image</h3>
+                        <div class="mb-6">
+                            <div class="flex flex-wrap gap-2">
+                                <button id="zoomInBtn" class="control-btn" disabled>Zoom In</button>
+                                <button id="zoomOutBtn" class="control-btn" disabled>Zoom Out</button>
+                                <button id="resetBtn" class="control-btn bg-groove-red text-white" disabled>Reset View</button>
                             </div>
                         </div>
+
+                        <div class="my-6 text-center">
+                            <div id="priceDisplay" class="text-3xl md:text-4xl font-black text-groove-red">
+                                Price: $0.00
+                            </div>
+                            <p class="text-sm font-semibold text-black mt-1">(Includes FREE shipping. Tax not included)</p>
+                        </div>
+
+                        <div class="mt-8 text-center">
+                            <button id="addToCartBtn" class="groove-btn text-xl" disabled>
+                                Add to Cart
+                            </button>
+                        </div>
                     </div>
-                </section>
-            </div>
+                </div>
+            </section>
 
             <!-- Artwork Gallery Section -->
-            <div id="gallery" class="page-content">
-                <section id="gallery-section" class="p-6 md:p-12 bg-white rounded-xl shadow-groove border-4 border-black mb-8">
-                    <h2 class="text-2xl md:text-4xl font-bold text-black mb-6 text-center">Groove Donkey Graphics</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <!-- Gallery Items - 15 placeholders in total -->
-                        <!-- Row 1 -->
-                        <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
-                            <img src="https://placehold.co/600x400/55b252/d12229?text=Gallery+Artwork+1" alt="Gallery Artwork 1" class="w-full h-auto rounded-md mb-4 border-2 border-black">
-                            <select id="gallery-item-1-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
-                            <div id="gallery-item-1-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
-                            <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
-                        </div>
-                        <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
-                            <img src="https://placehold.co/600x400/f7d636/000000?text=Gallery+Artwork+2" alt="Gallery Artwork 2" class="w-full h-auto rounded-md mb-4 border-2 border-black">
-                            <select id="gallery-item-2-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
-                            <div id="gallery-item-2-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
-                            <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
-                        </div>
-                        <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
-                            <img src="https://placehold.co/600x400/d12229/ffffff?text=Gallery+Artwork+3" alt="Gallery Artwork 3" class="w-full h-auto rounded-md mb-4 border-2 border-black">
-                            <select id="gallery-item-3-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
-                            <div id="gallery-item-3-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
-                            <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
-                        </div>
-                        <!-- Row 2 -->
-                        <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
-                            <img src="https://placehold.co/600x400/000000/55b252?text=Gallery+Artwork+4" alt="Gallery Artwork 4" class="w-full h-auto rounded-md mb-4 border-2 border-black">
-                            <select id="gallery-item-4-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
-                            <div id="gallery-item-4-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
-                            <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
-                        </div>
-                        <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
-                            <img src="https://placehold.co/600x400/55b252/000000?text=Gallery+Artwork+5" alt="Gallery Artwork 5" class="w-full h-auto rounded-md mb-4 border-2 border-black">
-                            <select id="gallery-item-5-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
-                            <div id="gallery-item-5-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
-                            <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
-                        </div>
-                        <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
-                            <img src="https://placehold.co/600x400/f7d636/d12229?text=Gallery+Artwork+6" alt="Gallery Artwork 6" class="w-full h-auto rounded-md mb-4 border-2 border-black">
-                            <select id="gallery-item-6-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
-                            <div id="gallery-item-6-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
-                            <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
-                        </div>
-                        <!-- Row 3 -->
-                        <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
-                            <img src="https://placehold.co/600x400/d12229/000000?text=Gallery+Artwork+7" alt="Gallery Artwork 7" class="w-full h-auto rounded-md mb-4 border-2 border-black">
-                            <select id="gallery-item-7-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
-                            <div id="gallery-item-7-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
-                            <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
-                        </div>
-                        <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
-                            <img src="https://placehold.co/600x400/000000/d12229?text=Gallery+Artwork+8" alt="Gallery Artwork 8" class="w-full h-auto rounded-md mb-4 border-2 border-black">
-                            <select id="gallery-item-8-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
-                            <div id="gallery-item-8-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
-                            <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
-                        </div>
-                        <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
-                            <img src="https://placehold.co/600x400/55b252/f7d636?text=Gallery+Artwork+9" alt="Gallery Artwork 9" class="w-full h-auto rounded-md mb-4 border-2 border-black">
-                            <select id="gallery-item-9-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
-                            <div id="gallery-item-9-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
-                            <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
-                        </div>
-                        <!-- Row 4 -->
-                        <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
-                            <img src="https://placehold.co/600x400/f7d636/55b252?text=Gallery+Artwork+10" alt="Gallery Artwork 10" class="w-full h-auto rounded-md mb-4 border-2 border-black">
-                            <select id="gallery-item-10-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
-                            <div id="gallery-item-10-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
-                            <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
-                        </div>
-                        <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
-                            <img src="https://placehold.co/600x400/d12229/55b252?text=Gallery+Artwork+11" alt="Gallery Artwork 11" class="w-full h-auto rounded-md mb-4 border-2 border-black">
-                            <select id="gallery-item-11-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
-                            <div id="gallery-item-11-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
-                            <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
-                        </div>
-                        <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
-                            <img src="https://placehold.co/600x400/55b252/d12229?text=Gallery+Artwork+12" alt="Gallery Artwork 12" class="w-full h-auto rounded-md mb-4 border-2 border-black">
-                            <select id="gallery-item-12-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
-                            <div id="gallery-item-12-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
-                            <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
-                        </div>
-                        <!-- Row 5 -->
-                        <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
-                            <img src="https://placehold.co/600x400/f7d636/000000?text=Gallery+Artwork+13" alt="Gallery Artwork 13" class="w-full h-auto rounded-md mb-4 border-2 border-black">
-                            <select id="gallery-item-13-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
-                            <div id="gallery-item-13-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
-                            <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
-                        </div>
-                        <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
-                            <img src="https://placehold.co/600x400/000000/d12229?text=Gallery+Artwork+14" alt="Gallery Artwork 14" class="w-full h-auto rounded-md mb-4 border-2 border-black">
-                            <select id="gallery-item-14-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
-                            <div id="gallery-item-14-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
-                            <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
-                        </div>
-                        <div class="flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black">
-                            <img src="https://placehold.co/600x400/d12229/ffffff?text=Gallery+Artwork+15" alt="Gallery Artwork 15" class="w-full h-auto rounded-md mb-4 border-2 border-black">
-                            <select id="gallery-item-15-size" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4"></select>
-                            <div id="gallery-item-15-price" class="text-xl font-bold text-groove-red mb-4">Price: TBD</div>
-                            <button class="gallery-buy-btn bg-groove-red text-white p-2 rounded-lg font-bold hover:bg-red-700 transition-colors w-full border-2 border-black">Buy Now</button>
-                        </div>
-                    </div>
-                </section>
-            </div>
+            <section id="gallery-section" class="p-6 md:p-12 groove-card mb-8 hidden">
+                <h2 class="text-2xl md:text-4xl font-bold text-black mb-8 text-center">Buy Our Exclusive Canvas Prints</h2>
+                <div id="gallery-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Gallery items will be injected here by JavaScript -->
+                </div>
+            </section>
         </main>
 
         <!-- Footer -->
-        <footer class="w-full max-w-7xl p-4 text-center text-sm text-gray-800">
-            &copy; 2025 Groove Donkey Graphics. All Rights Reserved.
+        <footer class="w-full max-w-7xl p-4 text-center text-sm font-bold text-white">
+            &copy; 2025 Groove Donkey Imageworks. All Rights Reserved.
         </footer>
 
         <!-- Modal for messages -->
@@ -279,7 +252,9 @@
     </div>
 
     <script>
-        // Data and functions moved to a single file for reliable performance
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- DATA ---
+        // Pricing and sizing data (as provided)
         const prices = {
             "8x12": 45, "12x8": 45,
             "12x16": 75, "16x12": 75,
@@ -304,357 +279,255 @@
                 { value: "36x24", text: '36" x 24"', width: 36, height: 24 }
             ]
         };
+        
+        // Data for the art gallery. You can easily add or remove items here.
+        const galleryArtworks = [
+            { id: 1, title: 'Cosmic Groove', img: 'https://placehold.co/600x400/d12229/ffffff?text=Cosmic+Groove' },
+            { id: 2, title: 'Jungle Beat', img: 'https://placehold.co/600x400/55b252/000000?text=Jungle+Beat' },
+            { id: 3, title: 'Solar Funk', img: 'https://placehold.co/600x400/f7d636/d12229?text=Solar+Funk' },
+            { id: 4, title: 'Deep Sea Disco', img: 'https://placehold.co/600x400/000000/55b252?text=Deep+Sea+Disco' },
+            { id: 5, title: 'Mountain Jam', img: 'https://placehold.co/600x400/f7d636/000000?text=Mountain+Jam' },
+            { id: 6, title: 'Desert Rhythm', img: 'https://placehold.co/600x400/d12229/000000?text=Desert+Rhythm' },
+        ];
 
-        function showMessage(message) {
-            const messageModal = document.getElementById('messageModal');
-            const modalMessage = document.getElementById('modalMessage');
-            const closeModalBtn = document.getElementById('closeModalBtn');
 
-            modalMessage.textContent = message;
-            messageModal.style.display = 'flex';
+        // --- DOM ELEMENTS ---
+        const navLinks = {
+            upload: document.getElementById('nav-upload'),
+            gallery: document.getElementById('nav-gallery'),
+            contact: document.getElementById('nav-contact'),
+        };
+        const sections = {
+            upload: document.getElementById('upload-section'),
+            gallery: document.getElementById('gallery-section'),
+        };
+        const modal = document.getElementById('messageModal');
+        const modalMessage = document.getElementById('modalMessage');
+        const closeModalBtn = document.getElementById('closeModalBtn');
 
-            closeModalBtn.addEventListener('click', () => {
-                messageModal.style.display = 'none';
-            });
-            window.addEventListener('click', (event) => {
-                if (event.target === messageModal) {
-                    messageModal.style.display = 'none';
-                }
-            });
+        // Upload section elements
+        const imageUpload = document.getElementById('imageUpload');
+        const previewPlaceholder = document.getElementById('previewPlaceholder');
+        const canvas = document.getElementById('imageCanvas');
+        const ctx = canvas.getContext('2d');
+        const sizeSelect = document.getElementById('sizeSelect');
+        const priceDisplay = document.getElementById('priceDisplay');
+        const addToCartBtn = document.getElementById('addToCartBtn');
+        const zoomInBtn = document.getElementById('zoomInBtn');
+        const zoomOutBtn = document.getElementById('zoomOutBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        
+        // Gallery section elements
+        const galleryGrid = document.getElementById('gallery-grid');
+
+        // --- STATE ---
+        let currentImage = null;
+        let scale = 1.0;
+        let offset = { x: 0, y: 0 };
+        let isDragging = false;
+        let startDrag = { x: 0, y: 0 };
+
+        // --- NAVIGATION ---
+        function navigateTo(hash) {
+            // Default to upload if hash is invalid or empty
+            const target = hash.substring(1) || 'upload';
+
+            Object.values(sections).forEach(section => section.classList.add('hidden'));
+            Object.values(navLinks).forEach(link => link.classList.remove('active'));
+            
+            if (sections[target]) {
+                sections[target].classList.remove('hidden');
+                navLinks[target].classList.add('active');
+            } else if (target === 'contact') {
+                // Special handling for contact link
+                navLinks.contact.classList.add('active');
+                showMessage('Contact us at groove@donkey.com!');
+                // Revert to previous state after showing message
+                const previousHash = window.location.hash.substring(1) || 'upload';
+                 if (navLinks[previousHash]) navLinks[previousHash].classList.add('active');
+            }
         }
         
-        function showPage(pageId) {
-            document.querySelectorAll('.page-content').forEach(page => {
-                page.classList.remove('active');
-            });
-            document.getElementById(pageId).classList.add('active');
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const imageUpload = document.getElementById('imageUpload');
-            const previewContainer = document.getElementById('previewContainer');
-            const previewPlaceholder = document.getElementById('previewPlaceholder');
-            const imageCanvas = document.getElementById('imageCanvas');
-            const sizeSelect = document.getElementById('sizeSelect');
-            const zoomInBtn = document.getElementById('zoomInBtn');
-            const zoomOutBtn = document.getElementById('zoomOutBtn');
-            const resetBtn = document.getElementById('resetBtn');
-            const cropBtn = document.getElementById('cropBtn');
-            const restartBtn = document.getElementById('restartBtn');
-            const priceDisplay = document.getElementById('priceDisplay');
-        
-            const ctx = imageCanvas.getContext('2d');
-            let uploadedImage = new Image();
-            let originalImageSrc = null;
-            let scale = 1;
-            let offsetX = 0;
-            let offsetY = 0;
-            let isDragging = false;
-            let lastMouseX = 0;
-            let lastMouseY = 0;
-            let isImageLoaded = false;
-            let cropMode = false;
-        
-            // Handle image upload
-            imageUpload.addEventListener('change', (e) => {
-                const file = e.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = (event) => {
-                        originalImageSrc = event.target.result;
-                        uploadedImage.onload = () => {
-                            isImageLoaded = true;
-                            resetImage();
-                            previewPlaceholder.style.display = 'none';
-                            populateSizeOptions(uploadedImage.width, uploadedImage.height);
-                        };
-                        uploadedImage.src = originalImageSrc;
-                    };
-                    reader.readAsDataURL(file);
+        window.addEventListener('hashchange', () => navigateTo(window.location.hash));
+        Object.values(navLinks).forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    window.location.hash = href;
                 }
-            });
-        
-            // Populate the size dropdown based on image orientation
-            function populateSizeOptions(imageWidth, imageHeight) {
-                sizeSelect.innerHTML = '';
-                sizeSelect.disabled = false;
-        
-                const aspectRatio = imageWidth / imageHeight;
-                let orientation;
-        
-                if (aspectRatio >= 1) {
-                    orientation = 'landscape';
-                } else {
-                    orientation = 'portrait';
-                }
-        
-                sizes[orientation].forEach(size => {
-                    const option = document.createElement('option');
-                    option.value = size.value;
-                    option.textContent = size.text;
-                    sizeSelect.appendChild(option);
-                });
-        
-                setCanvasDimensions();
-                updatePriceDisplay();
-            }
-        
-            // Update canvas dimensions and redraw the image
-            function setCanvasDimensions() {
-                if (!isImageLoaded) return;
-        
-                const selectedSizeValue = sizeSelect.value;
-                const allSizes = [...sizes.portrait, ...sizes.landscape];
-                const selectedSize = allSizes.find(size => size.value === selectedSizeValue);
-                if (!selectedSize) return;
-                
-                const containerWidth = previewContainer.offsetWidth;
-                let newWidth, newHeight;
-                if (selectedSize.width > selectedSize.height) {
-                    newWidth = containerWidth;
-                    newHeight = (containerWidth / selectedSize.width) * selectedSize.height;
-                } else {
-                    newHeight = containerWidth;
-                    newWidth = (containerWidth / selectedSize.height) * selectedSize.width;
-                }
-        
-                imageCanvas.width = newWidth;
-                imageCanvas.height = newHeight;
-                previewContainer.style.height = `${newHeight}px`;
-                drawImage();
-            }
-        
-            function updatePriceDisplay() {
-                const selectedSizeValue = sizeSelect.value;
-                const price = prices[selectedSizeValue];
-                if (price) {
-                    priceDisplay.textContent = `Price: $${price}`;
-                } else {
-                    priceDisplay.textContent = `Price: TBD`;
-                }
-            }
-            
-            sizeSelect.addEventListener('change', () => {
-                setCanvasDimensions();
-                updatePriceDisplay();
-            });
-            window.addEventListener('resize', setCanvasDimensions);
-        
-            function drawImage() {
-                if (!isImageLoaded) return;
-                
-                const canvasWidth = imageCanvas.width;
-                const canvasHeight = imageCanvas.height;
-                
-                ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-                
-                const currentWidth = uploadedImage.width * scale;
-                const currentHeight = uploadedImage.height * scale;
-        
-                const aspectRatio = uploadedImage.width / uploadedImage.height;
-                const canvasAspectRatio = canvasWidth / canvasHeight;
-        
-                let drawWidth, drawHeight;
-                if (aspectRatio > canvasAspectRatio) {
-                    drawHeight = canvasHeight * scale;
-                    drawWidth = drawHeight * aspectRatio;
-                } else {
-                    drawWidth = canvasWidth * scale;
-                    drawHeight = drawWidth / aspectRatio;
-                }
-                
-                const centerX = (canvasWidth - drawWidth) / 2;
-                const centerY = (canvasHeight - drawHeight) / 2;
-        
-                ctx.drawImage(uploadedImage, centerX + offsetX, centerY + offsetY, drawWidth, drawHeight);
-                
-                if (cropMode) {
-                    ctx.strokeStyle = '#d12229';
-                    ctx.lineWidth = 2;
-                    ctx.setLineDash([5, 5]);
-                    ctx.strokeRect(0, 0, canvasWidth, canvasHeight);
-                    ctx.setLineDash([]);
-                }
-            }
-        
-            function resetImage() {
-                scale = 1;
-                offsetX = 0;
-                offsetY = 0;
-                drawImage();
-            }
-        
-            // Image controls
-            zoomInBtn.addEventListener('click', () => {
-                if (!isImageLoaded) { showMessage("Please upload an image first."); return; }
-                scale *= 1.1;
-                drawImage();
-            });
-        
-            zoomOutBtn.addEventListener('click', () => {
-                if (!isImageLoaded) { showMessage("Please upload an image first."); return; }
-                scale /= 1.1;
-                if (scale < 0.1) scale = 0.1;
-                drawImage();
-            });
-        
-            resetBtn.addEventListener('click', () => {
-                if (!isImageLoaded) { showMessage("Please upload an image first."); return; }
-                uploadedImage.src = originalImageSrc;
-                uploadedImage.onload = () => {
-                    resetImage();
-                };
-                cropBtn.textContent = 'Crop';
-                cropMode = false;
-            });
-        
-            cropBtn.addEventListener('click', () => {
-                if (!isImageLoaded) { showMessage("Please upload an image first."); return; }
-                cropMode = !cropMode;
-                cropBtn.textContent = cropMode ? 'Apply Crop' : 'Crop';
-                
-                if (!cropMode) {
-                    const tempCanvas = document.createElement('canvas');
-                    tempCanvas.width = imageCanvas.width;
-                    tempCanvas.height = imageCanvas.height;
-                    const tempCtx = tempCanvas.getContext('2d');
-                    
-                    tempCtx.drawImage(imageCanvas, 0, 0, tempCanvas.width, tempCanvas.height);
-                    
-                    uploadedImage.src = tempCanvas.toDataURL('image/png');
-                    uploadedImage.onload = () => {
-                        resetImage();
-                    };
-                }
-                drawImage();
-            });
-            
-            // Restart button functionality
-            restartBtn.addEventListener('click', () => {
-                if (!isImageLoaded) { showMessage("No image to restart with."); return; }
-                isImageLoaded = false;
-                ctx.clearRect(0, 0, imageCanvas.width, imageCanvas.height);
-                previewPlaceholder.style.display = 'block';
-                imageUpload.value = '';
-                sizeSelect.innerHTML = '<option value="">Upload an image to see options</option>';
-                sizeSelect.disabled = true;
-                priceDisplay.textContent = 'Price: TBD';
-                cropBtn.textContent = 'Crop';
-                cropMode = false;
-                scale = 1;
-                offsetX = 0;
-                offsetY = 0;
-            });
-        
-            // Dragging for alignment
-            imageCanvas.addEventListener('mousedown', (e) => {
-                if (!isImageLoaded) return;
-                isDragging = true;
-                lastMouseX = e.clientX;
-                lastMouseY = e.clientY;
-            });
-        
-            imageCanvas.addEventListener('mousemove', (e) => {
-                if (!isDragging || !isImageLoaded) return;
-                const dx = e.clientX - lastMouseX;
-                const dy = e.clientY - lastMouseY;
-                offsetX += dx;
-                offsetY += dy;
-                lastMouseX = e.clientX;
-                lastMouseY = e.clientY;
-                drawImage();
-            });
-        
-            imageCanvas.addEventListener('mouseup', () => {
-                isDragging = false;
-            });
-        
-            imageCanvas.addEventListener('mouseleave', () => {
-                isDragging = false;
-            });
-        
-            // Touch events for mobile
-            imageCanvas.addEventListener('touchstart', (e) => {
-                if (!isImageLoaded) return;
-                isDragging = true;
-                const touch = e.touches[0];
-                lastMouseX = touch.clientX;
-                lastMouseY = touch.clientY;
-                e.preventDefault();
-            });
-        
-            imageCanvas.addEventListener('touchmove', (e) => {
-                if (!isDragging || !isImageLoaded) return;
-                const touch = e.touches[0];
-                const dx = touch.clientX - lastMouseX;
-                const dy = touch.clientY - lastMouseY;
-                offsetX += dx;
-                offsetY += dy;
-                lastMouseX = touch.clientX;
-                lastMouseY = touch.clientY;
-                drawImage();
-                e.preventDefault();
-            });
-        
-            imageCanvas.addEventListener('touchend', () => {
-                isDragging = false;
-            });
-        
-            // Add to cart functionality for custom prints
-            document.getElementById('addToCartBtn').addEventListener('click', () => {
-                if (!isImageLoaded) {
-                    showMessage("Please upload an image before adding to cart!");
-                    return;
-                }
-                const selectedSizeValue = sizeSelect.value;
-                const price = prices[selectedSizeValue];
-                const selectedSizeText = sizeSelect.options[sizeSelect.selectedIndex].text;
-                
-                const message = `Added your ${selectedSizeText} canvas print to the cart for $${price}!`;
-                showMessage(message);
-            });
-        
-            // Gallery section functionality
-            const artworkSizes = sizes.landscape;
-            const gallerySelects = document.querySelectorAll('.gallery-size-select');
-            const galleryBuyButtons = document.querySelectorAll('.gallery-buy-btn');
-        
-            gallerySelects.forEach((select, index) => {
-                artworkSizes.forEach(size => {
-                    const option = document.createElement('option');
-                    option.value = size.value;
-                    option.textContent = size.text;
-                    select.appendChild(option);
-                });
-        
-                select.addEventListener('change', () => {
-                    const selectedSizeValue = select.value;
-                    const priceDisplay = document.getElementById(`gallery-item-${index + 1}-price`);
-                    const price = prices[selectedSizeValue];
-                    priceDisplay.textContent = `Price: $${price}`;
-                });
-        
-                const initialPrice = prices[select.value];
-                const priceDisplay = document.getElementById(`gallery-item-${index + 1}-price`);
-                if (initialPrice) {
-                    priceDisplay.textContent = `Price: $${initialPrice}`;
-                } else {
-                    priceDisplay.textContent = `Price: TBD`;
-                }
-        
-                galleryBuyButtons.forEach(button => {
-                    button.addEventListener('click', () => {
-                        const selectElement = button.parentElement.querySelector('.gallery-size-select');
-                        const selectedSizeValue = selectElement.value;
-                        const price = prices[selectedSizeValue];
-                        const selectedSizeText = selectElement.options[selectElement.selectedIndex].text;
-                        const artworkNumber = button.parentElement.querySelector('img').alt.slice(-1);
-                        const message = `Added Artwork ${artworkNumber} (${selectedSizeText}) to the cart for $${price}!`;
-                        showMessage(message);
-                    });
-                });
             });
         });
+
+
+        // --- MODAL ---
+        function showMessage(message) {
+            modalMessage.textContent = message;
+            modal.style.display = 'flex';
+        }
+        closeModalBtn.addEventListener('click', () => modal.style.display = 'none');
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) modal.style.display = 'none';
+        });
+
+        // --- UPLOAD SECTION LOGIC ---
+        function initUploadSection() {
+            imageUpload.addEventListener('change', handleImageUpload);
+            sizeSelect.addEventListener('change', updatePrice);
+            addToCartBtn.addEventListener('click', handleAddToCart);
+            zoomInBtn.addEventListener('click', () => adjustZoom(1.1));
+            zoomOutBtn.addEventListener('click', () => adjustZoom(0.9));
+            resetBtn.addEventListener('click', resetCanvasState);
+
+            // Canvas drag listeners
+            canvas.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                startDrag = { x: e.clientX - offset.x, y: e.clientY - offset.y };
+                canvas.style.cursor = 'grabbing';
+            });
+            canvas.addEventListener('mouseup', () => {
+                isDragging = false;
+                canvas.style.cursor = 'grab';
+            });
+            canvas.addEventListener('mouseleave', () => { isDragging = false; canvas.style.cursor = 'grab';});
+            canvas.addEventListener('mousemove', (e) => {
+                if (isDragging && currentImage) {
+                    offset.x = e.clientX - startDrag.x;
+                    offset.y = e.clientY - startDrag.y;
+                    drawImage();
+                }
+            });
+        }
+
+        function handleImageUpload(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                currentImage = new Image();
+                currentImage.onload = () => {
+                    resetCanvasState();
+                    populateSizeOptions();
+                    enableControls();
+                    drawImage();
+                    updatePrice();
+                };
+                currentImage.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function resetCanvasState() {
+            if (!currentImage) return;
+            scale = 1.0;
+            offset = { x: 0, y: 0 };
+            const container = canvas.parentElement;
+            canvas.width = container.clientWidth;
+            canvas.height = container.clientHeight;
+            drawImage();
+        }
+
+        function populateSizeOptions() {
+            const isPortrait = currentImage.height > currentImage.width;
+            const availableSizes = isPortrait ? sizes.portrait : sizes.landscape;
+            
+            sizeSelect.innerHTML = '';
+            availableSizes.forEach(size => {
+                const option = document.createElement('option');
+                option.value = size.value;
+                option.textContent = size.text;
+                sizeSelect.appendChild(option);
+            });
+        }
+
+        function enableControls() {
+            previewPlaceholder.style.display = 'none';
+            canvas.style.cursor = 'grab';
+            [sizeSelect, addToCartBtn, zoomInBtn, zoomOutBtn, resetBtn].forEach(el => el.disabled = false);
+        }
+
+        function drawImage() {
+            if (!currentImage) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.save();
+            ctx.translate(canvas.width / 2 + offset.x, canvas.height / 2 + offset.y);
+            ctx.scale(scale, scale);
+            ctx.drawImage(currentImage, -currentImage.width / 2, -currentImage.height / 2);
+            ctx.restore();
+        }
+
+        function adjustZoom(factor) {
+            if (!currentImage) return;
+            scale *= factor;
+            drawImage();
+        }
+        
+        function updatePrice() {
+            const selectedSize = sizeSelect.value;
+            const price = prices[selectedSize] || 0;
+            priceDisplay.textContent = `Price: $${price.toFixed(2)}`;
+        }
+
+        function handleAddToCart() {
+            const selectedSizeValue = sizeSelect.value;
+            const selectedSizeText = sizeSelect.options[sizeSelect.selectedIndex].text;
+            const price = prices[selectedSizeValue];
+            showMessage(`Your custom ${selectedSizeText} canvas has been added to the cart for $${price.toFixed(2)}!`);
+        }
+
+        // --- GALLERY SECTION LOGIC ---
+        function initGallerySection() {
+            galleryGrid.innerHTML = ''; // Clear existing
+            galleryArtworks.forEach(art => {
+                const card = document.createElement('div');
+                card.className = 'flex flex-col items-center bg-gray-100 rounded-lg p-4 shadow-md border-2 border-black';
+                
+                // Assuming all gallery art is landscape for size options
+                const sizeOptions = sizes.landscape.map(s => `<option value="${s.value}">${s.text}</option>`).join('');
+                const initialPrice = prices[sizes.landscape[0].value].toFixed(2);
+
+                card.innerHTML = `
+                    <img src="${art.img}" alt="${art.title}" class="w-full h-auto rounded-md mb-4 border-2 border-black" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/000000?text=Image+Not+Found';">
+                    <h3 class="text-xl font-bold mb-2">${art.title}</h3>
+                    <select data-art-id="${art.id}" class="gallery-size-select w-full p-2 border-2 border-black rounded-lg bg-white text-lg mb-4">${sizeOptions}</select>
+                    <div class="text-center mb-4">
+                        <div id="gallery-price-${art.id}" class="text-xl font-bold text-groove-red">Price: $${initialPrice}</div>
+                        <p class="text-xs font-semibold text-black mt-1">(Includes FREE shipping. Tax not included)</p>
+                    </div>
+                    <button data-art-id="${art.id}" data-art-title="${art.title}" class="gallery-buy-btn groove-btn w-full">Buy Now</button>
+                `;
+                galleryGrid.appendChild(card);
+            });
+
+            // Add event listeners after creating all cards
+            galleryGrid.addEventListener('change', (e) => {
+                if (e.target.classList.contains('gallery-size-select')) {
+                    const selectedSize = e.target.value;
+                    const artId = e.target.dataset.artId;
+                    const price = prices[selectedSize] || 0;
+                    document.getElementById(`gallery-price-${artId}`).textContent = `Price: $${price.toFixed(2)}`;
+                }
+            });
+
+            galleryGrid.addEventListener('click', (e) => {
+                if (e.target.classList.contains('gallery-buy-btn')) {
+                    const artId = e.target.dataset.artId;
+                    const artTitle = e.target.dataset.artTitle;
+                    const selectElement = galleryGrid.querySelector(`.gallery-size-select[data-art-id="${artId}"]`);
+                    const selectedSizeValue = selectElement.value;
+                    const selectedSizeText = selectElement.options[selectElement.selectedIndex].text;
+                    const price = prices[selectedSizeValue];
+                    showMessage(`Added "${artTitle}" (${selectedSizeText}) to the cart for $${price.toFixed(2)}!`);
+                }
+            });
+        }
+
+        // --- INITIALIZATION ---
+        initUploadSection();
+        initGallerySection();
+        navigateTo(window.location.hash); // Navigate to initial hash or default
+    });
     </script>
 </body>
 </html>
